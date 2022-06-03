@@ -1,0 +1,16 @@
+Average Corrects for All User
+-------------------------------------------------
+SELECT u.user_id, AVG(t.correct)
+  FROM test_result AS t
+  JOIN user As u
+    ON u.user_id = t.test_id
+ GROUP BY u.user_id;
+
+
+The Time of their Most Recently Taken Test
+-------------------------------------------------
+SELECT * 
+FROM test_result
+WHERE user_id IN (SELECT user_id FROM test_result WHERE time_taken = (SELECT MAX(time_taken) FROM test_result))
+ORDER BY user_id DESC
+LIMIT 1
