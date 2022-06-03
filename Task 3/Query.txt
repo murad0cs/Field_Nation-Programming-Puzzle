@@ -1,0 +1,1 @@
+SELECT t.user_id, AVG(t.correct), MAX(t.time_taken) FROM (SELECT u.user_id, t.time_taken, correct FROM user AS u LEFT JOIN test_result As t ON u.user_id = t.user_id ORDER BY time_taken DESC) t GROUP BY t.user_id ORDER BY (SELECT MAX(t.time_taken) FROM test_result GROUP BY t.user_id) DESC;
